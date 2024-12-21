@@ -9,9 +9,52 @@ thead th {
 table td,
 table th {
   padding: 12px 20px;
-  text-align: center;
+  text-align: left;
+}
+/* ===== */
+
+table thead {
+  border-bottom: 1px solid #daf1fb;
 }
 
+table th:nth-child(1) button,
+table th:nth-child(1) div,
+table th:nth-child(14) button,
+table th:nth-child(14) div {
+  display: none;
+}
+
+table th div.table-headings {
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+}
+
+table tbody tr td:first-child,
+table tbody tr td:last-child {
+  padding: 12px 4px;
+}
+table tbody tr td:first-child button {
+  color: #18425d !important;
+}
+table tbody tr td {
+  color: #274f68;
+  font-weight: 500;
+}
+table tbody tr td:nth-child(2) {
+  color: #3c86fd;
+}
+table tbody tr td:nth-child(10),
+table tbody tr td:nth-child(11),
+table tbody tr td:nth-child(13) {
+  color: #959aa0;
+}
+/* table tbody tr td button {
+  background-color: transparent !important;
+  color: #267ec9 !important ;
+} */
+
+/* ==== */
 table tbody tr {
   border-bottom: 1px solid #ddd;
 }

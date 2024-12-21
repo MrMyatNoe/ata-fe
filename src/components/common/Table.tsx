@@ -15,8 +15,8 @@ import RowDetail from "./RowDetail";
 import { customFilter } from "./Table.utils";
 import TableHeader from "./TableHeader";
 
-export function Table() {
-  const { data, columns } = useTableData();
+export function Table({ searchCriteria }: { searchCriteria: any }) {
+  const { data, columns } = useTableData(searchCriteria);
   const table = useReactTable<Data>({
     data,
     columns,
