@@ -29,11 +29,11 @@ export default function RowDetail({ data }: { data: Data }) {
     userId,
   } = data;
   return (
-    <Box>
+    <Box bgColor={"#FAFAFF"}>
       <Stack dir="column" spacing="1" gap="4">
         <Box>
           <HStack>
-            <Text as="h4" color="blue" fontWeight="bold">
+            <Text as="h4" color="#3387FC" fontWeight="bold">
               FIRST-NAME LAST-NAME ( {firstName} - {lastName} )
             </Text>
             <Button
@@ -52,53 +52,69 @@ export default function RowDetail({ data }: { data: Data }) {
         <HStack gap={5} dir="row">
           <Box>
             <VStack align="start">
-              <Text fontSize="sm">Net Amount: </Text>
-              <Text fontSize="sm" fontWeight="bold">
-                {netAmount.toFixed(2)} USD
-              </Text>
-              <Text fontSize="sm">Reference Number: </Text>
-              <Text fontSize="sm" fontWeight="bold">
-                {referenceNumber}
-              </Text>
+              <HStack>
+                <Text fontSize="sm">Net Amount: </Text>
+                <Text fontSize="sm" fontWeight="bold">
+                  {netAmount.toFixed(2)} USD
+                </Text>
+              </HStack>
+              <HStack>
+                <Text fontSize="sm">Reference Number: </Text>
+                <Text fontSize="sm" fontWeight="bold">
+                  {referenceNumber}
+                </Text>
+              </HStack>
             </VStack>
           </Box>
           <Spacer />
           <Box>
             <VStack align="start">
-              <Text fontSize="sm">Price: </Text>
-              <Text fontSize="sm" fontWeight="bold">
-                {price.toFixed(2)}
-              </Text>
-              <Text fontSize="sm">Date / Time: </Text>
-              <Text fontSize="sm" fontWeight="bold">
-                {moment(dateTime).format("YYYY/MM/DD HH:mm:ss")}
-              </Text>
+              <HStack>
+                <Text fontSize="sm">Price: </Text>
+                <Text fontSize="sm" fontWeight="bold">
+                  {price.toFixed(2)}
+                </Text>
+              </HStack>
+              <HStack>
+                <Text fontSize="sm">Date / Time: </Text>
+                <Text fontSize="sm" fontWeight="bold">
+                  {moment(dateTime).format("YYYY/MM/DD HH:mm:ss")}
+                </Text>
+              </HStack>
             </VStack>
           </Box>
           <Spacer />
           <Box>
             <VStack align="start">
-              <Text fontSize="sm">Exchange Rate: </Text>
-              <Text fontSize="sm" fontWeight="bold">
-                {exchangeRate.toFixed(4)}
-              </Text>
-              <Text fontSize="sm">Telephone: </Text>
-              <Text fontSize="sm" fontWeight="bold">
-                {telephone}
-              </Text>
+              <HStack>
+                <Text fontSize="sm">Exchange Rate: </Text>
+                <Text fontSize="sm" fontWeight="bold">
+                  {exchangeRate.toFixed(4)}
+                </Text>
+              </HStack>
+              <HStack>
+                <Text fontSize="sm">Telephone: </Text>
+                <Text fontSize="sm" fontWeight="bold">
+                  {telephone}
+                </Text>
+              </HStack>
             </VStack>
           </Box>
           <Spacer />
           <Box>
             <VStack align="start">
-              <Text fontSize="sm">O/S Limit: </Text>
-              <Text fontSize="sm" fontWeight="bold">
-                {osLimit.toFixed(1)}
-              </Text>
-              <Text fontSize="sm">User ID: </Text>
-              <Text fontSize="sm" fontWeight="bold">
-                {userId}
-              </Text>
+              <HStack>
+                <Text fontSize="sm">O/S Limit: </Text>
+                <Text fontSize="sm" fontWeight="bold">
+                  {osLimit.toFixed(1)}
+                </Text>
+              </HStack>
+              <HStack>
+                <Text fontSize="sm">User ID: </Text>
+                <Text fontSize="sm" fontWeight="bold">
+                  {userId}
+                </Text>
+              </HStack>
             </VStack>
           </Box>
           <Spacer />
@@ -108,17 +124,39 @@ export default function RowDetail({ data }: { data: Data }) {
         alignItems="start"
         p="4"
         justifyContent="start"
-        bg="yellow.100"
-        mt="2"
+        bg="#F5F5F5"
+        mt="4"
         borderRadius="2"
       >
         <Text fontSize="sm" fontWeight="bold" as="h5" colorScheme="blue.500">
-          Warnings
+          Warning(s)
         </Text>
-        <UnorderedList p="4" textAlign="start" alignItems="start">
-          <ListItem>Warning 12</ListItem>
-          <ListItem>Warning 222222</ListItem>
-          <ListItem>Warning 3</ListItem>
+        <UnorderedList
+          p="6 4 0 6"
+          textAlign="start"
+          alignItems="start"
+          color={"#000"}
+          fontSize={"sm"}
+        >
+          <ListItem>
+            To Trade this security in this account, a currency conversion will
+            made at the current rate.
+          </ListItem>
+          <ListItem>A Similar Order has already been submitted.</ListItem>
+          <ListItem>
+            Your trasanction will be processed the following busniess day.
+          </ListItem>
+          <ListItem>
+            It is not possible to calculate the buying of this order.
+          </ListItem>
+          <ListItem>
+            A Cancellation will not be possible during business hours on market
+            orders. You can call a representative for more information.
+          </ListItem>
+          <ListItem>
+            For the above-mentioned reason(s), your order will be processed by
+            one of our representatives.
+          </ListItem>
         </UnorderedList>
       </Stack>
     </Box>

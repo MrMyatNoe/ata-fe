@@ -28,47 +28,48 @@ export default function TableHeader({
       style={{ width: header.getSize(), position: "relative" }}
       colSpan={header.colSpan}
     >
-      {/* {header.isPlaceholder
-        ? null
-        : flexRender(header.column.columnDef.header, header.getContext())} */}
       <Menu>
-        <MenuButton
-          as={IconButton}
-          aria-label="options"
-          icon={<MdOutlineMoreVert />}
-          style={{
-            position: "absolute",
-            right: 4,
-            top: 20,
-            color: "black",
-          }}
-          className="menu"
-          size="sm"
-          colorScheme="black"
-        />
-        <Portal>
-          <MenuList color="black">
-            <MenuItem
-              fontSize="sm"
-              onClick={header.column.getToggleSortingHandler()}
-            >
-              {isSorted === "asc" ? "Sort Desc" : "Sort Asc"}
-            </MenuItem>
-          </MenuList>
-        </Portal>
-        <Flex justifyContent={"center"} gap={1} alignItems="center">
-          <Text fontSize="s">
-            {header.isPlaceholder
-              ? null
-              : flexRender(header.column.columnDef.header, header.getContext())}
-          </Text>
-          {isSorted && (
-            <Box>
-              {isSorted === "asc" && <FaChevronUp />}
-              {isSorted === "desc" && <FaChevronDown />}
-            </Box>
-          )}
-        </Flex>
+        <Box className="table-headings">
+          <Flex justifyContent={"flex-start"} gap={1} alignItems="start">
+            <Text fontSize="s">
+              {header.isPlaceholder
+                ? null
+                : flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
+            </Text>
+            {isSorted && (
+              <Box>
+                {isSorted === "asc" && <FaChevronUp />}
+                {isSorted === "desc" && <FaChevronDown />}
+              </Box>
+            )}
+          </Flex>
+          <MenuButton
+            as={IconButton}
+            aria-label="options"
+            icon={<MdOutlineMoreVert />}
+            style={{
+              color: "black",
+              position: "relative",
+              top: "-2px",
+            }}
+            className="menu"
+            size="sm"
+            colorScheme="black"
+          />
+          <Portal>
+            <MenuList color="black">
+              <MenuItem
+                fontSize="sm"
+                onClick={header.column.getToggleSortingHandler()}
+              >
+                {isSorted === "asc" ? "Sort Desc" : "Sort Asc"}
+              </MenuItem>
+            </MenuList>
+          </Portal>
+        </Box>
       </Menu>
     </th>
   );
