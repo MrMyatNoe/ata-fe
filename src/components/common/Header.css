@@ -1,9 +1,15 @@
+#date-popper {
+  z-index: 99 !important;
+  position: static;
+}
+
 .date-picker-input {
   border-width: 2px !important;
   border-radius: 6px !important;
   font-weight: 500;
   color: #385c74;
 }
+
 .date-picker-icon {
   top: initial !important;
   color: skyblue;

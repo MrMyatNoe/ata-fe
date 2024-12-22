@@ -41,12 +41,11 @@ export const Header = ({
       fromDate: moment(fromDate).format("YYYY-MM-DD"),
       toDate: moment(toDate).format("YYYY-MM-DD"),
     };
-    console.log(criteria);
     onSearch(criteria);
   };
 
   return (
-    <Flex minWidth="max-content" alignItems="center" gap="2">
+    <Flex minWidth="max-content" alignItems="center" gap="2" mb={2}>
       <Box>
         <VStack alignItems="start">
           <Text fontSize="lg" fontWeight="bold" color="#214963">
@@ -128,16 +127,18 @@ export const Header = ({
           </Text>
           <InputGroup alignItems="center">
             <DatePicker
+              portalId="date-popper"
               selected={fromDate}
               onChange={(date) => setFromDate(date ?? new Date())}
               customInput={
                 <Input
                   placeholder="Pick a date"
                   size="sm"
-                  value={moment(fromDate).format("DD/MM/YYYY")}
+                  value={moment(fromDate).format("dd/mm/YYYY")}
                 />
               }
               className="date-picker-input"
+              dateFormat={"dd/MM/yyyy"}
             />
             <InputRightElement
               children={<FaRegCalendarAlt />}
@@ -149,6 +150,7 @@ export const Header = ({
           </Text>
           <InputGroup alignItems="center">
             <DatePicker
+              portalId="date-popper"
               selected={toDate}
               onChange={(date) => setToDate(date ?? new Date())}
               customInput={
@@ -159,6 +161,7 @@ export const Header = ({
                 />
               }
               className="date-picker-input"
+              dateFormat={"dd/MM/yyyy"}
             />
             <InputRightElement
               children={<FaRegCalendarAlt />}
