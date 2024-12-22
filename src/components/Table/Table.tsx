@@ -14,7 +14,6 @@ import {
 import { useTableData } from "../../hooks/useTableData";
 import { Data } from "../../types/Data";
 import RowDetail from "./ExpandRow";
-import { customFilter } from "./Table.utils";
 import TableHeader from "./TableHeader";
 
 export function Table({ searchCriteria }: { searchCriteria: any }) {
@@ -26,10 +25,6 @@ export function Table({ searchCriteria }: { searchCriteria: any }) {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    filterFns: {
-      fuzzy: customFilter,
-    },
-    globalFilterFn: customFilter, //TODO - globalFilterFn
     getRowCanExpand: () => true,
   });
   return (

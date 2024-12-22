@@ -39,6 +39,12 @@ export type Data = {
   userId: number;
 };
 
+export type SearchCriteria = {
+  period: string;
+  status: string;
+  fromDate: Date;
+  toDate: Date;
+};
 export const dataSamples: Data[] = [
   {
     id: 1,

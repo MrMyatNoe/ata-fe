@@ -24,13 +24,12 @@ import { useMediaBreakpoints } from "../../hooks/useMediaQuery";
 import { Operation, Status } from "../../types/Data";
 import HeaderColumnView from "./HeaderColumnView";
 
-export const Header = ({
-  onSearch,
-  filterCount,
-}: {
+interface HeaderProps {
   onSearch: (criteria: any) => void;
   filterCount: number;
-}) => {
+}
+
+export const Header = ({ onSearch, filterCount }: HeaderProps) => {
   const [period, setPeriod] = useState<Operation>(Operation.All);
   const [status, setStatus] = useState<Status>(Status.All);
   const [fromDate, setFromDate] = useState(new Date());
