@@ -50,9 +50,10 @@ const HeaderColumnView: React.FC<HeaderColumnViewProps> = ({
       minWidth="max-content"
       alignItems="center"
       gap="2"
-      mb={2}
+      pb={2}
+      style={{ display: "table-cell" }}
     >
-      <Box>
+      <Box mb={3}>
         <VStack alignItems="start">
           <Text fontSize="lg" fontWeight="bold" color="#214963">
             Search

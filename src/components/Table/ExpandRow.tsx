@@ -43,7 +43,7 @@ export default function RowDetail({ data }: { data: Data }) {
   };
 
   return (
-    <Box bgColor={"#FAFAFF"} ml={"15px"} pl={"20px"}>
+    <Box bgColor={"#FAFAFF"} ml={"15px"} pl={"15px"}>
       <Stack dir="column" spacing="1" gap="4">
         <Box>
           <HStack>

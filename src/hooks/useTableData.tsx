@@ -56,7 +56,7 @@ export const useTableData = ({
               icon={
                 row.getIsExpanded() ? <IoIosArrowDown /> : <IoIosArrowForward />
               }
-              size="sm"
+              size={isMobile ? "xs" : "sm"}
               colorScheme="black"
               variant="solid"
               color="gray.600"
