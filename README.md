@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# ATA FE assignment
 
 ## Tech Stack 
 
