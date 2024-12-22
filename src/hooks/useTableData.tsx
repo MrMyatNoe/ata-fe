@@ -21,7 +21,9 @@ export const useTableData = ({
   fromDate,
   toDate,
 }: SearchCriteria) => {
+
   const [data] = useState(dataSamples);
+
   const { isMobile } = useMediaBreakpoints();
 
   const filteredData = useMemo(() => {
