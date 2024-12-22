@@ -38,7 +38,7 @@ export function Table({ searchCriteria }: { searchCriteria: any }) {
         <thead>
           {table.getHeaderGroups().map((headerGroup: any) => {
             return (
-              <tr>
+              <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header: any) => {
                   return <TableHeader key={header.id} header={header} />;
                 })}
@@ -51,7 +51,7 @@ export function Table({ searchCriteria }: { searchCriteria: any }) {
           {table.getRowModel().rows.map((row: any) => {
             return (
               <React.Fragment key={row.id}>
-                <tr>
+                <tr key={row.id}>
                   {row.getVisibleCells().map((cell: any) => {
                     return (
                       <td key={cell.id}>
@@ -64,7 +64,7 @@ export function Table({ searchCriteria }: { searchCriteria: any }) {
                   })}
                 </tr>
                 {row.getIsExpanded() && (
-                  <tr>
+                  <tr key={`${row.id}-expanded`}>
                     <td colSpan={row.getVisibleCells().length}>
                       <RowDetail data={row.original} />
                     </td>

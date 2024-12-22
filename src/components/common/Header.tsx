@@ -20,7 +20,9 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
+import { useMediaBreakpoints } from "../../hooks/useMediaQuery";
 import { Operation, Status } from "../../types/Data";
+import HeaderColumnView from "./HeaderColumnView";
 
 export const Header = ({
   onSearch,
@@ -33,6 +35,7 @@ export const Header = ({
   const [status, setStatus] = useState<Status>(Status.All);
   const [fromDate, setFromDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
+  const { isMobile, isSmallDesktop } = useMediaBreakpoints();
 
   const handleSearch = () => {
     const criteria = {
@@ -44,8 +47,24 @@ export const Header = ({
     onSearch(criteria);
   };
 
+  if (isMobile || isSmallDesktop) {
+    return (
+      <HeaderColumnView
+        period={period}
+        setPeriod={setPeriod}
+        status={status}
+        setStatus={setStatus}
+        fromDate={fromDate}
+        setFromDate={setFromDate}
+        toDate={toDate}
+        setToDate={setToDate}
+        handleSearch={handleSearch}
+        filterCount={filterCount}
+      />
+    );
+  }
   return (
-    <Flex minWidth="max-content" alignItems="center" gap="2" mb={2}>
+    <Flex minWidth="max-content" alignItems="center" gap="2" mb={2} dir="row">
       <Box>
         <VStack alignItems="start">
           <Text fontSize="lg" fontWeight="bold" color="#214963">
@@ -80,7 +99,6 @@ export const Header = ({
             borderWidth={2}
             fontWeight={500}
           >
-            <option value={Operation.All}>All</option>
             {Object.values(Operation)
               .filter((op) => op !== Operation.All)
               .map((op) => (
@@ -109,7 +127,6 @@ export const Header = ({
             borderWidth={2}
             fontWeight={500}
           >
-            <option value={Status.All}>All</option>
             {Object.values(Status)
               .filter((st) => st !== Status.All)
               .map((st) => (
