@@ -13,7 +13,7 @@ import {
 
 import { useTableData } from "../../hooks/useTableData";
 import { Data } from "../../types/Data";
-import RowDetail from "./ExpandRow";
+import ExpandRow from "./ExpandRow";
 import TableHeader from "./TableHeader";
 
 export function Table({ searchCriteria }: { searchCriteria: any }) {
@@ -61,7 +61,7 @@ export function Table({ searchCriteria }: { searchCriteria: any }) {
                 {row.getIsExpanded() && (
                   <tr key={`${row.id}-expanded`}>
                     <td colSpan={row.getVisibleCells().length}>
-                      <RowDetail data={row.original} />
+                      <ExpandRow data={row.original} />
                     </td>
                   </tr>
                 )}

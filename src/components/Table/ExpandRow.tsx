@@ -14,9 +14,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
+import { useMediaBreakpoints } from "../../hooks/useMediaQuery";
 import { Data } from "../../types/Data";
 
-export default function RowDetail({ data }: { data: Data }) {
+export default function ExpandRow({ data }: { data: Data }) {
+  const { isMobile } = useMediaBreakpoints();
   const {
     firstName,
     lastName,
@@ -43,10 +45,18 @@ export default function RowDetail({ data }: { data: Data }) {
   };
 
   return (
-    <Box bgColor={"#FAFAFF"} ml={"15px"} pl={"15px"}>
-      <Stack dir="column" spacing="1" gap="4">
+    <Box
+      bgColor={"#FAFAFF"}
+      ml={"15px"}
+      pl={"15px"}
+      className="repsonsive-expand"
+    >
+      <Stack dir={isMobile ? "row" : "column"} spacing="1" gap="4">
         <Box>
-          <HStack>
+          <HStack
+            flexDirection={isMobile ? "column" : "row"}
+            alignItems={isMobile ? "flex-start" : "center"}
+          >
             <Text as="h4" color="#3387FC" fontWeight="bold">
               FIRST-NAME LAST-NAME ( {firstName} - {lastName} )
             </Text>
@@ -65,34 +75,39 @@ export default function RowDetail({ data }: { data: Data }) {
               Full Review Details
             </Button>
             <Spacer />
-            <Button
-              color="#fff"
-              bgColor={"#0D70C4"}
-              size="md"
-              borderRadius="20px"
-              width="110px"
-              onClick={handleAccepted}
-              fontSize="14px"
-            >
-              ACCEPT
-            </Button>
-            <Button
-              borderColor="#CA303D"
-              size="md"
-              borderRadius="20px"
-              width="120px"
-              fontSize="sm"
-              variant="outline"
-              rightIcon={<IoIosArrowDown fontWeight={"bold"} />}
-              color={"#CA303D"}
-              height={"32px"}
-              onClick={handleRejected}
-            >
-              Reject
-            </Button>
+            <HStack align="start">
+              <Button
+                color="#fff"
+                bgColor={"#0D70C4"}
+                size="md"
+                borderRadius="20px"
+                width="110px"
+                onClick={handleAccepted}
+                fontSize="14px"
+              >
+                ACCEPT
+              </Button>
+              <Button
+                borderColor="#CA303D"
+                size="md"
+                borderRadius="20px"
+                width="120px"
+                fontSize="sm"
+                variant="outline"
+                rightIcon={<IoIosArrowDown fontWeight={"bold"} />}
+                color={"#CA303D"}
+                onClick={handleRejected}
+              >
+                Reject
+              </Button>
+            </HStack>
           </HStack>
         </Box>
-        <HStack gap={5} dir="row">
+        <HStack
+          gap={isMobile ? "1" : "5"}
+          flexDirection={isMobile ? "column" : "row"}
+          alignItems={isMobile ? "flex-start" : "center"}
+        >
           <Box>
             <VStack align="start">
               <HStack>

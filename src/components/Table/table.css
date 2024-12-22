@@ -92,10 +92,6 @@ table thead tr th:first-child {
   }
   table tbody tr td:first-child {
     padding: 12px 0px;
-    display: flex;
-    height: 70px;
-    width: 16px;
-    align-items: center;
   }
   table tbody tr td:first-child button {
     min-width: 16px;
@@ -103,6 +99,11 @@ table thead tr th:first-child {
   table tbody tr td:nth-child(2),
   table thead tr th:nth-child(2) {
     padding: 12px 0px 12px 6px;
+  }
+  /*  */
+  table tbody tr td .repsonsive-expand {
+    padding-top: 10px;
+    margin-left: 0px;
   }
 }
 @media (max-width: 1440px) and (min-width: 1024px) {
