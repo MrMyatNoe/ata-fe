@@ -1,5 +1,6 @@
 import moment from "moment";
 import { CiShare1 } from "react-icons/ci";
+import { IoIosArrowDown } from "react-icons/io";
 
 import {
   Box,
@@ -28,6 +29,19 @@ export default function RowDetail({ data }: { data: Data }) {
     telephone,
     userId,
   } = data;
+
+  const handleAccepted = () => {
+    console.log("accepted");
+  };
+
+  const handleRejected = () => {
+    console.log("rejected");
+  };
+
+  const handleViewDetails = () => {
+    console.log("view details");
+  };
+
   return (
     <Box bgColor={"#FAFAFF"} ml={"15px"} pl={"20px"}>
       <Stack dir="column" spacing="1" gap="4">
@@ -46,8 +60,35 @@ export default function RowDetail({ data }: { data: Data }) {
               rightIcon={<CiShare1 fontWeight={"bold"} />}
               color={"#3387FC"}
               height={"32px"}
+              onClick={handleViewDetails}
             >
               Full Review Details
+            </Button>
+            <Spacer />
+            <Button
+              color="#fff"
+              bgColor={"#0D70C4"}
+              size="md"
+              borderRadius="20px"
+              width="110px"
+              onClick={handleAccepted}
+              fontSize="14px"
+            >
+              ACCEPT
+            </Button>
+            <Button
+              borderColor="#CA303D"
+              size="md"
+              borderRadius="20px"
+              width="120px"
+              fontSize="sm"
+              variant="outline"
+              rightIcon={<IoIosArrowDown fontWeight={"bold"} />}
+              color={"#CA303D"}
+              height={"32px"}
+              onClick={handleRejected}
+            >
+              Reject
             </Button>
           </HStack>
         </Box>

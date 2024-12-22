@@ -24,7 +24,6 @@ export const useTableData = (searchCriteria: {
   const [data, setData] = useState(dataSamples);
   const { isMobile } = useMediaBreakpoints();
 
-  console.log("search creteria", searchCriteria);
   const filteredData = useMemo(() => {
     return data.filter((item) => {
       const matchesPeriod =
@@ -230,8 +229,6 @@ export const useTableData = (searchCriteria: {
       : columns;
   }, [columns, isMobile]);
 
-  console.log("filtered columns", filteredColumns);
-  console.log("isMobile", isMobile);
   return {
     columns: filteredColumns,
     data: filteredData,
