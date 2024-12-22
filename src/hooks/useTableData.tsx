@@ -147,7 +147,15 @@ export const useTableData = (searchCriteria: {
             gap="2"
             className="responsive-column status"
           >
-            <CgSandClock style={{ borderRadius: "50%" }} />
+            <CgSandClock
+              style={{
+                borderRadius: "50%",
+                color: "#688FAB",
+                border: "1px solid #63ABE1",
+                padding: "4px",
+                fontSize: "22px",
+              }}
+            />
             {getValue()}
           </Flex>
         ),
