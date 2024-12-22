@@ -4,8 +4,8 @@ import { useState } from "react";
 
 import { Container } from "@chakra-ui/react";
 
-import { Header } from "./components/common/Header";
-import { Table } from "./components/common/Table";
+import { Header } from "./components/Header/Header";
+import { Table } from "./components/Table/Table";
 import { useTableData } from "./hooks/useTableData";
 
 function App() {

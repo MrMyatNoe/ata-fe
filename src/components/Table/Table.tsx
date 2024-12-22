@@ -13,7 +13,7 @@ import {
 
 import { useTableData } from "../../hooks/useTableData";
 import { Data } from "../../types/Data";
-import RowDetail from "./RowDetail";
+import RowDetail from "./ExpandRow";
 import { customFilter } from "./Table.utils";
 import TableHeader from "./TableHeader";
 
