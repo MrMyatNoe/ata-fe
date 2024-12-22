@@ -6,7 +6,7 @@ import { IoIosArrowDown, IoIosArrowForward, IoIosMore } from "react-icons/io";
 import { Flex, IconButton } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 
-import { Data, dataSamples } from "../types/Data";
+import { Data, dataSamples, SearchCriteria } from "../types/Data";
 import { useMediaBreakpoints } from "./useMediaQuery";
 
 const columnHelper = createColumnHelper<Data>();
@@ -15,35 +15,35 @@ const formatExtRef = (extRef: string) => {
   if (extRef.length < 9) return extRef;
   return `2-${extRef.slice(1, 8)}1-0000`;
 };
-export const useTableData = (searchCriteria: {
-  period: string;
-  status: string;
-  fromDate: Date;
-  toDate: Date;
-}) => {
+export const useTableData = ({
+  period,
+  status,
+  fromDate,
+  toDate,
+}: SearchCriteria) => {
   const [data, setData] = useState(dataSamples);
   const { isMobile } = useMediaBreakpoints();
 
   const filteredData = useMemo(() => {
     return data.filter((item) => {
+      const { operation, status: itemStatus, dateTime } = item;
       const matchesPeriod =
-        searchCriteria.period === "all" || !searchCriteria.period
+        period === "all" || !period
           ? true
-          : item.operation.toLowerCase() ===
-            searchCriteria.period.toLowerCase();
+          : operation.toLowerCase() === period.toLowerCase();
       const matchesStatus =
-        searchCriteria.status === "all" || !searchCriteria.status
+        status === "all" || !status
           ? true
-          : item.status.toLowerCase() === searchCriteria.status.toLowerCase();
-      const matchesFromDate = searchCriteria.fromDate
-        ? moment(item.dateTime).isSameOrAfter(moment(searchCriteria.fromDate))
+          : itemStatus.toLowerCase() === status.toLowerCase();
+      const matchesFromDate = fromDate
+        ? moment(dateTime).isSameOrAfter(moment(fromDate))
         : true;
-      const matchesToDate = searchCriteria.toDate
-        ? moment(item.dateTime).isSameOrBefore(moment(searchCriteria.toDate))
+      const matchesToDate = toDate
+        ? moment(dateTime).isSameOrBefore(moment(toDate))
         : true;
       return matchesPeriod && matchesStatus && matchesFromDate && matchesToDate;
     });
-  }, [data, searchCriteria]);
+  }, [data, period, status, fromDate, toDate]);
 
   const columns = useMemo(
     () => [
@@ -56,7 +56,7 @@ export const useTableData = (searchCriteria: {
               icon={
                 row.getIsExpanded() ? <IoIosArrowDown /> : <IoIosArrowForward />
               }
-              size="sm"
+              size={isMobile ? "xs" : "sm"}
               colorScheme="black"
               variant="solid"
               color="gray.600"
@@ -147,7 +147,15 @@ export const useTableData = (searchCriteria: {
             gap="2"
             className="responsive-column status"
           >
-            <CgSandClock style={{ borderRadius: "50%" }} />
+            <CgSandClock
+              style={{
+                borderRadius: "50%",
+                color: "#688FAB",
+                border: "1px solid #63ABE1",
+                padding: "4px",
+                fontSize: "22px",
+              }}
+            />
             {getValue()}
           </Flex>
         ),
