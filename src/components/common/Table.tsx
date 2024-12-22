@@ -1,5 +1,7 @@
 import "./table.css";
 
+import React from "react";
+
 import { Box } from "@chakra-ui/react";
 import {
   flexRender,
@@ -17,6 +19,7 @@ import TableHeader from "./TableHeader";
 
 export function Table({ searchCriteria }: { searchCriteria: any }) {
   const { data, columns } = useTableData(searchCriteria);
+
   const table = useReactTable<Data>({
     data,
     columns,
@@ -37,7 +40,7 @@ export function Table({ searchCriteria }: { searchCriteria: any }) {
             return (
               <tr>
                 {headerGroup.headers.map((header: any) => {
-                  return <TableHeader header={header} />;
+                  return <TableHeader key={header.id} header={header} />;
                 })}
               </tr>
             );
@@ -47,7 +50,7 @@ export function Table({ searchCriteria }: { searchCriteria: any }) {
         <tbody>
           {table.getRowModel().rows.map((row: any) => {
             return (
-              <>
+              <React.Fragment key={row.id}>
                 <tr>
                   {row.getVisibleCells().map((cell: any) => {
                     return (
@@ -67,7 +70,7 @@ export function Table({ searchCriteria }: { searchCriteria: any }) {
                     </td>
                   </tr>
                 )}
-              </>
+              </React.Fragment>
             );
           })}
         </tbody>

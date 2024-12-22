@@ -7,6 +7,7 @@ import { Flex, IconButton } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 
 import { Data, dataSamples } from "../types/Data";
+import { useMediaBreakpoints } from "./useMediaQuery";
 
 const columnHelper = createColumnHelper<Data>();
 
@@ -21,6 +22,7 @@ export const useTableData = (searchCriteria: {
   toDate: Date;
 }) => {
   const [data, setData] = useState(dataSamples);
+  const { isMobile } = useMediaBreakpoints();
 
   console.log("search creteria", searchCriteria);
   const filteredData = useMemo(() => {
@@ -44,7 +46,6 @@ export const useTableData = (searchCriteria: {
     });
   }, [data, searchCriteria]);
 
-  console.log("filtered data", filteredData);
   const columns = useMemo(
     () => [
       columnHelper.display({
@@ -70,17 +71,28 @@ export const useTableData = (searchCriteria: {
         header: () => (
           <span style={{ color: "#688FAB", fontSize: "14px" }}>Account</span>
         ),
+        cell: ({ getValue }) => (
+          <span className="responsive-column account">{getValue()}</span>
+        ),
+        size: 0,
       }),
       columnHelper.accessor("operation", {
         id: "operation",
         header: () => (
           <span style={{ color: "#688FAB", fontSize: "14px" }}>Operation</span>
         ),
+        cell: ({ getValue }) => (
+          <span className="responsive-column operation">{getValue()}</span>
+        ),
+        size: 0,
       }),
       columnHelper.accessor("symbol", {
         id: "symbol",
         header: () => (
           <span style={{ color: "#688FAB", fontSize: "14px" }}>Symbol</span>
+        ),
+        cell: ({ getValue }) => (
+          <span className="responsive-column symbol">{getValue()}</span>
         ),
       }),
       columnHelper.accessor("description", {
@@ -90,26 +102,40 @@ export const useTableData = (searchCriteria: {
             Description
           </span>
         ),
-        size: 250,
+        cell: ({ getValue }) => (
+          <span className="responsive-column description">{getValue()}</span>
+        ),
+        size: 240,
       }),
       columnHelper.accessor("quantity", {
         id: "quantity",
         header: () => (
           <span style={{ color: "#688FAB", fontSize: "14px" }}>Qty</span>
         ),
+        cell: ({ getValue }) => (
+          <span className="responsive-column quantity">{getValue()}</span>
+        ),
+        size: 100,
       }),
       columnHelper.accessor("filledQuantity", {
         id: "filledQuantity",
         header: () => (
           <span style={{ color: "#688FAB", fontSize: "14px" }}>Filled Qty</span>
         ),
-        size: 200,
+        cell: ({ getValue }) => (
+          <span className="responsive-column filledQuantity">{getValue()}</span>
+        ),
+        size: 210,
       }),
       columnHelper.accessor("price", {
         id: "price",
         header: () => (
           <span style={{ color: "#688FAB", fontSize: "14px" }}>Price</span>
         ),
+        cell: ({ getValue }) => (
+          <span className="responsive-column price">{getValue()}</span>
+        ),
+        size: 100,
       }),
       columnHelper.accessor("status", {
         id: "status",
@@ -117,7 +143,11 @@ export const useTableData = (searchCriteria: {
           <span style={{ color: "#688FAB", fontSize: "14px" }}>Status</span>
         ),
         cell: ({ getValue }) => (
-          <Flex alignItems="center" gap="2">
+          <Flex
+            alignItems="center"
+            gap="2"
+            className="responsive-column status"
+          >
             <CgSandClock style={{ borderRadius: "50%" }} />
             {getValue()}
           </Flex>
@@ -128,8 +158,11 @@ export const useTableData = (searchCriteria: {
         header: () => (
           <span style={{ color: "#688FAB", fontSize: "14px" }}>Date</span>
         ),
-        cell: ({ getValue }) =>
-          moment(getValue()).format("YYYY/MM/DD hh:mm:ss"),
+        cell: ({ getValue }) => (
+          <span className="responsive-column date">
+            {moment(getValue()).format("YYYY/MM/DD hh:mm:ss")}
+          </span>
+        ),
         size: 250,
       }),
       columnHelper.accessor("expiration", {
@@ -137,14 +170,20 @@ export const useTableData = (searchCriteria: {
         header: () => (
           <span style={{ color: "#688FAB", fontSize: "14px" }}>Expiration</span>
         ),
-        cell: ({ getValue }) =>
-          moment(getValue()).format("YYYY/MM/DD hh:mm:ss"),
-        size: 250,
+        cell: ({ getValue }) => (
+          <span className="responsive-column expiration">
+            {moment(getValue()).format("YYYY/MM/DD hh:mm:ss")},
+          </span>
+        ),
+        size: 240,
       }),
       columnHelper.accessor("noRef", {
         id: "noRef",
         header: () => (
           <span style={{ color: "#688FAB", fontSize: "14px" }}>No. Ref.</span>
+        ),
+        cell: ({ getValue }) => (
+          <span className="responsive-column noRef">{getValue()}</span>
         ),
         size: 200,
       }),
@@ -153,7 +192,11 @@ export const useTableData = (searchCriteria: {
         header: () => (
           <span style={{ color: "#688FAB", fontSize: "14px" }}>Ext. Ref.</span>
         ),
-        cell: ({ getValue }) => formatExtRef(getValue()),
+        cell: ({ getValue }) => (
+          <span className="responsive-column extRef">
+            {formatExtRef(getValue())}
+          </span>
+        ),
         size: 250,
       }),
       columnHelper.display({
@@ -175,5 +218,23 @@ export const useTableData = (searchCriteria: {
     []
   );
 
-  return { columns, data: filteredData, count: filteredData.length };
+  const filteredColumns = useMemo(() => {
+    return isMobile
+      ? columns.filter(
+          (column) =>
+            column.id &&
+            ["expand", "account", "operation", "symbol", "status"].includes(
+              column.id
+            )
+        )
+      : columns;
+  }, [columns, isMobile]);
+
+  console.log("filtered columns", filteredColumns);
+  console.log("isMobile", isMobile);
+  return {
+    columns: filteredColumns,
+    data: filteredData,
+    count: filteredData.length,
+  };
 };

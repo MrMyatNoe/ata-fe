@@ -29,7 +29,7 @@ export default function RowDetail({ data }: { data: Data }) {
     userId,
   } = data;
   return (
-    <Box bgColor={"#FAFAFF"}>
+    <Box bgColor={"#FAFAFF"} ml={"15px"} pl={"20px"}>
       <Stack dir="column" spacing="1" gap="4">
         <Box>
           <HStack>
@@ -37,13 +37,15 @@ export default function RowDetail({ data }: { data: Data }) {
               FIRST-NAME LAST-NAME ( {firstName} - {lastName} )
             </Text>
             <Button
-              borderColor="blue.500"
+              borderColor="gray.500"
               size="md"
               borderRadius="20px"
-              width="200px"
+              width="180px"
               fontSize="sm"
               variant="outline"
-              rightIcon={<CiShare1 />}
+              rightIcon={<CiShare1 fontWeight={"bold"} />}
+              color={"#3387FC"}
+              height={"32px"}
             >
               Full Review Details
             </Button>
